@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rotate = new System.Windows.Forms.Button();
             this.text = new System.Windows.Forms.Button();
             this.effects = new System.Windows.Forms.Button();
             this.crop = new System.Windows.Forms.Button();
@@ -56,7 +57,7 @@
             this.undo = new System.Windows.Forms.Button();
             this.redo = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.rotate = new System.Windows.Forms.Button();
+            this.wave = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -80,6 +81,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(400, 70);
             this.panel1.TabIndex = 0;
+            // 
+            // rotate
+            // 
+            this.rotate.BackColor = System.Drawing.Color.White;
+            this.rotate.Image = ((System.Drawing.Image)(resources.GetObject("rotate.Image")));
+            this.rotate.Location = new System.Drawing.Point(84, 0);
+            this.rotate.Name = "rotate";
+            this.rotate.Size = new System.Drawing.Size(75, 67);
+            this.rotate.TabIndex = 4;
+            this.rotate.UseVisualStyleBackColor = false;
+            this.rotate.Click += new System.EventHandler(this.rotate_Click);
             // 
             // text
             // 
@@ -166,13 +178,14 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGray;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.wave);
             this.panel2.Controls.Add(this.close);
             this.panel2.Controls.Add(this.blur);
             this.panel2.Controls.Add(this.sharpen);
             this.panel2.Controls.Add(this.gray);
-            this.panel2.Location = new System.Drawing.Point(200, 500);
+            this.panel2.Location = new System.Drawing.Point(170, 500);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(400, 70);
+            this.panel2.Size = new System.Drawing.Size(450, 70);
             this.panel2.TabIndex = 7;
             this.panel2.Visible = false;
             // 
@@ -180,7 +193,7 @@
             // 
             this.close.BackColor = System.Drawing.Color.Silver;
             this.close.Image = ((System.Drawing.Image)(resources.GetObject("close.Image")));
-            this.close.Location = new System.Drawing.Point(301, 24);
+            this.close.Location = new System.Drawing.Point(371, 22);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(75, 23);
             this.close.TabIndex = 3;
@@ -272,7 +285,7 @@
             this.panel6.Controls.Add(this.textBox1);
             this.panel6.Controls.Add(this.cancel);
             this.panel6.Controls.Add(this.apply);
-            this.panel6.Location = new System.Drawing.Point(200, 500);
+            this.panel6.Location = new System.Drawing.Point(200, 100);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(400, 70);
             this.panel6.TabIndex = 12;
@@ -364,16 +377,15 @@
             this.panel5.Size = new System.Drawing.Size(100, 100);
             this.panel5.TabIndex = 11;
             // 
-            // rotate
+            // wave
             // 
-            this.rotate.BackColor = System.Drawing.Color.Black;
-            this.rotate.Location = new System.Drawing.Point(84, 0);
-            this.rotate.Name = "rotate";
-            this.rotate.Size = new System.Drawing.Size(75, 67);
-            this.rotate.TabIndex = 4;
-            this.rotate.Text = "Rotate";
-            this.rotate.UseVisualStyleBackColor = false;
-            this.rotate.Click += new System.EventHandler(this.rotate_Click);
+            this.wave.Location = new System.Drawing.Point(290, 0);
+            this.wave.Name = "wave";
+            this.wave.Size = new System.Drawing.Size(75, 67);
+            this.wave.TabIndex = 4;
+            this.wave.Text = "Wave";
+            this.wave.UseVisualStyleBackColor = true;
+            this.wave.Click += new System.EventHandler(this.wave_Click);
             // 
             // Form1
             // 
@@ -433,6 +445,7 @@
         private System.Windows.Forms.Button redo;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button rotate;
+        private System.Windows.Forms.Button wave;
 
 
     }

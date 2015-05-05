@@ -140,9 +140,21 @@ namespace PhotoEditor
 
         private void rotate_Click(object sender, EventArgs e)
         {
+            
             RotateNearestNeighbor filter = new RotateNearestNeighbor(90, true);
             Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
             pictureBox1.Image = newImage;
+        }
+
+        private void wave_Click(object sender, EventArgs e)
+        {
+            WaterWave filter=new WaterWave();
+            filter.HorizontalWavesCount=10;
+            filter.HorizontalWavesAmplitude = 5;
+            filter.VerticalWavesCount = 10;
+            filter.VerticalWavesAmplitude = 5;
+            Bitmap waveimage = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = waveimage;
         }
             
     }
