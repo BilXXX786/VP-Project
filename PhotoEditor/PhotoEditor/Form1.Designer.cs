@@ -39,6 +39,8 @@
             this.save = new System.Windows.Forms.Button();
             this.zoomin = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.brightness = new System.Windows.Forms.Button();
+            this.wave = new System.Windows.Forms.Button();
             this.close = new System.Windows.Forms.Button();
             this.blur = new System.Windows.Forms.Button();
             this.sharpen = new System.Windows.Forms.Button();
@@ -57,7 +59,10 @@
             this.undo = new System.Windows.Forms.Button();
             this.redo = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.wave = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.low = new System.Windows.Forms.Button();
+            this.high = new System.Windows.Forms.Button();
+            this.back = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -65,6 +70,7 @@
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -178,24 +184,45 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGray;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.brightness);
             this.panel2.Controls.Add(this.wave);
             this.panel2.Controls.Add(this.close);
             this.panel2.Controls.Add(this.blur);
             this.panel2.Controls.Add(this.sharpen);
             this.panel2.Controls.Add(this.gray);
-            this.panel2.Location = new System.Drawing.Point(170, 500);
+            this.panel2.Location = new System.Drawing.Point(150, 500);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(450, 70);
+            this.panel2.Size = new System.Drawing.Size(500, 70);
             this.panel2.TabIndex = 7;
             this.panel2.Visible = false;
+            // 
+            // brightness
+            // 
+            this.brightness.Image = ((System.Drawing.Image)(resources.GetObject("brightness.Image")));
+            this.brightness.Location = new System.Drawing.Point(327, 0);
+            this.brightness.Name = "brightness";
+            this.brightness.Size = new System.Drawing.Size(75, 67);
+            this.brightness.TabIndex = 5;
+            this.brightness.UseVisualStyleBackColor = true;
+            this.brightness.Click += new System.EventHandler(this.brightness_Click);
+            // 
+            // wave
+            // 
+            this.wave.Image = ((System.Drawing.Image)(resources.GetObject("wave.Image")));
+            this.wave.Location = new System.Drawing.Point(246, 0);
+            this.wave.Name = "wave";
+            this.wave.Size = new System.Drawing.Size(75, 67);
+            this.wave.TabIndex = 4;
+            this.wave.UseVisualStyleBackColor = true;
+            this.wave.Click += new System.EventHandler(this.wave_Click);
             // 
             // close
             // 
             this.close.BackColor = System.Drawing.Color.Silver;
             this.close.Image = ((System.Drawing.Image)(resources.GetObject("close.Image")));
-            this.close.Location = new System.Drawing.Point(371, 22);
+            this.close.Location = new System.Drawing.Point(408, 0);
             this.close.Name = "close";
-            this.close.Size = new System.Drawing.Size(75, 23);
+            this.close.Size = new System.Drawing.Size(75, 67);
             this.close.TabIndex = 3;
             this.close.UseVisualStyleBackColor = false;
             this.close.Click += new System.EventHandler(this.close_Click);
@@ -204,7 +231,7 @@
             // 
             this.blur.BackColor = System.Drawing.Color.Silver;
             this.blur.Image = ((System.Drawing.Image)(resources.GetObject("blur.Image")));
-            this.blur.Location = new System.Drawing.Point(209, 0);
+            this.blur.Location = new System.Drawing.Point(165, 0);
             this.blur.Name = "blur";
             this.blur.Size = new System.Drawing.Size(75, 67);
             this.blur.TabIndex = 2;
@@ -215,7 +242,7 @@
             // 
             this.sharpen.BackColor = System.Drawing.Color.Silver;
             this.sharpen.Image = ((System.Drawing.Image)(resources.GetObject("sharpen.Image")));
-            this.sharpen.Location = new System.Drawing.Point(114, 0);
+            this.sharpen.Location = new System.Drawing.Point(84, 0);
             this.sharpen.Name = "sharpen";
             this.sharpen.Size = new System.Drawing.Size(75, 67);
             this.sharpen.TabIndex = 1;
@@ -226,7 +253,7 @@
             // 
             this.gray.BackColor = System.Drawing.Color.Silver;
             this.gray.Image = ((System.Drawing.Image)(resources.GetObject("gray.Image")));
-            this.gray.Location = new System.Drawing.Point(18, 0);
+            this.gray.Location = new System.Drawing.Point(3, 0);
             this.gray.Name = "gray";
             this.gray.Size = new System.Drawing.Size(75, 67);
             this.gray.TabIndex = 0;
@@ -377,15 +404,47 @@
             this.panel5.Size = new System.Drawing.Size(100, 100);
             this.panel5.TabIndex = 11;
             // 
-            // wave
+            // panel7
             // 
-            this.wave.Location = new System.Drawing.Point(290, 0);
-            this.wave.Name = "wave";
-            this.wave.Size = new System.Drawing.Size(75, 67);
-            this.wave.TabIndex = 4;
-            this.wave.Text = "Wave";
-            this.wave.UseVisualStyleBackColor = true;
-            this.wave.Click += new System.EventHandler(this.wave_Click);
+            this.panel7.BackColor = System.Drawing.Color.DarkGray;
+            this.panel7.Controls.Add(this.back);
+            this.panel7.Controls.Add(this.high);
+            this.panel7.Controls.Add(this.low);
+            this.panel7.Location = new System.Drawing.Point(300, 500);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(180, 70);
+            this.panel7.TabIndex = 13;
+            this.panel7.Visible = false;
+            // 
+            // low
+            // 
+            this.low.Image = ((System.Drawing.Image)(resources.GetObject("low.Image")));
+            this.low.Location = new System.Drawing.Point(8, 3);
+            this.low.Name = "low";
+            this.low.Size = new System.Drawing.Size(75, 23);
+            this.low.TabIndex = 0;
+            this.low.UseVisualStyleBackColor = true;
+            this.low.Click += new System.EventHandler(this.low_Click);
+            // 
+            // high
+            // 
+            this.high.Image = ((System.Drawing.Image)(resources.GetObject("high.Image")));
+            this.high.Location = new System.Drawing.Point(8, 32);
+            this.high.Name = "high";
+            this.high.Size = new System.Drawing.Size(75, 23);
+            this.high.TabIndex = 1;
+            this.high.UseVisualStyleBackColor = true;
+            this.high.Click += new System.EventHandler(this.high_Click);
+            // 
+            // back
+            // 
+            this.back.Image = ((System.Drawing.Image)(resources.GetObject("back.Image")));
+            this.back.Location = new System.Drawing.Point(101, 0);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(75, 67);
+            this.back.TabIndex = 2;
+            this.back.UseVisualStyleBackColor = true;
+            this.back.Click += new System.EventHandler(this.back_Click);
             // 
             // Form1
             // 
@@ -394,6 +453,7 @@
             this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 612);
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -411,6 +471,7 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -446,6 +507,11 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button rotate;
         private System.Windows.Forms.Button wave;
+        private System.Windows.Forms.Button brightness;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button back;
+        private System.Windows.Forms.Button high;
+        private System.Windows.Forms.Button low;
 
 
     }

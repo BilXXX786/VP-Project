@@ -110,18 +110,22 @@ namespace PhotoEditor
 
         private void resize_Click(object sender, EventArgs e)
         {
+            /*
             panel2.Visible = false;
             panel6.Visible = true;
-            /*
+            */
             ResizeNearestNeighbor filter = new ResizeNearestNeighbor(400, 300); 
             Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
             pictureBox1.Image = newImage;
-            */
+            
         }
 
         private void crop_Click(object sender, EventArgs e)
         {
-            
+            Crop filter = new Crop(new Rectangle(75, 75, 320, 240));
+            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = newImage;
+
         }
 
         private void sharpen_Click(object sender, EventArgs e)
@@ -156,6 +160,34 @@ namespace PhotoEditor
             Bitmap waveimage = filter.Apply((Bitmap)pictureBox1.Image);
             pictureBox1.Image = waveimage;
         }
+
+        private void brightness_Click(object sender, EventArgs e)
+        {
+            panel2.Visible=false;
+            panel7.Visible = true;
             
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            panel2.Visible = true;
+            panel7.Visible = false;
+        }
+
+        private void low_Click(object sender, EventArgs e)
+        {
+            BrightnessCorrection filter = new BrightnessCorrection(-15);
+            Bitmap bright = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = bright;
+        }
+
+        private void high_Click(object sender, EventArgs e)
+        {
+            BrightnessCorrection filter = new BrightnessCorrection(15);
+            Bitmap bright = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = bright;
+        }
+
+        
     }
 }
