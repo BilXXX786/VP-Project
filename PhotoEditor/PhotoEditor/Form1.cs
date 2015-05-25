@@ -16,7 +16,6 @@ using AForge.Imaging.ComplexFilters;
 using AForge.Imaging.Filters;
 using System.Drawing.Text;
 
-
 namespace PhotoEditor
 {
     public partial class Form1 : Form
@@ -26,46 +25,9 @@ namespace PhotoEditor
             InitializeComponent();
         }
 
-        private void upload_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openfd = new OpenFileDialog();
-            openfd.Filter = "Images only. | *.jpg; *.jpeg; *.png; *.gif;";
-            DialogResult dr = openfd.ShowDialog();
-            Bitmap objBitmap = new Bitmap(System.Drawing.Image.FromFile(openfd.FileName), new Size(500, 500));
-            
-            pictureBox1.Image = objBitmap;
-        }
-
-        private void zoomin_Click(object sender, EventArgs e)
-        {
-            Size newSize = new Size((int)(pictureBox1.Image.Width * 1.25), (int)(pictureBox1.Image.Height * 1.25));
-            Bitmap obj = new Bitmap(pictureBox1.Image, newSize);
-            pictureBox1.Image = obj;
-           
-        }
-
-        private void zoomout_Click(object sender, EventArgs e)
-        {
-            Size newSize = new Size((int)(pictureBox1.Image.Width * .75), (int)(pictureBox1.Image.Height * .75));
-            Bitmap obj = new Bitmap(pictureBox1.Image, newSize);
-            pictureBox1.Image = obj;
-        }
-
-        private void effects_Click(object sender, EventArgs e)
-        {
-            panel2.Visible = true;
-           
-        }
-
-        private void close_Click(object sender, EventArgs e)
-        {
-           
-            panel2.Visible = false;
-        }
-
         private void save_Click(object sender, EventArgs e)
         {
-            
+         
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Images|*.png;*.bmp;*.jpg";
             ImageFormat format = ImageFormat.Png;
@@ -83,75 +45,85 @@ namespace PhotoEditor
                 }
                 pictureBox1.Image.Save(sfd.FileName, format);
             }
-             
+        }
+
+        private void upload_Click(object sender, EventArgs e)
+        {
+        OpenFileDialog openfd = new OpenFileDialog();
+            openfd.Filter = "Images only. | *.jpg; *.jpeg; *.png; *.gif;";
+            DialogResult dr = openfd.ShowDialog();
+            Bitmap objBitmap = new Bitmap(System.Drawing.Image.FromFile(openfd.FileName), new Size(500, 500));
+
+            pictureBox1.Image = objBitmap;
+        }
+
+        private void crop_Click(object sender, EventArgs e)
+        {
+        panel1.Visible = true;
+        }
+
+        private void cancelcrop_Click(object sender, EventArgs e)
+        {
+            panel1.Visible=false;
+        }
+
+        private void applycrop_Click(object sender, EventArgs e)
+        {
+        int height, width;
+            width = Int32.Parse(textBox1.Text);
+            height = Int32.Parse(textBox2.Text);
+            Crop filter = new Crop(new Rectangle(width, height, 500-width, 500-height));
+            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = newImage;
+            panel1.Visible = false;
+        }
+
+        private void rotate_Click(object sender, EventArgs e)
+        {
+        RotateNearestNeighbor filter = new RotateNearestNeighbor(90, true);
+            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = newImage;
+        }
+
+        private void resize_Click(object sender, EventArgs e)
+        {
+            panel2.Visible=true;
+        }
+
+        private void cancelresize_Click(object sender, EventArgs e)
+        {
+            panel2.Visible=false;
+        }
+
+        private void applyresize_Click(object sender, EventArgs e)
+        {
+        int height, width;
+            width = Int32.Parse(textBox3.Text);
+            height = Int32.Parse(textBox4.Text);
+            ResizeNearestNeighbor filter = new ResizeNearestNeighbor(width, height);
+            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = newImage;
+            panel2.Visible = false;
+        }
+
+        private void gray_Click(object sender, EventArgs e)
+        {
+            GrayscaleBT709 gray1 = new GrayscaleBT709();
+            pictureBox1.Image = gray1.Apply((Bitmap)pictureBox1.Image);
         }
 
         private void blur_Click(object sender, EventArgs e)
         {
             GaussianBlur filter = new GaussianBlur(4, 11);
-            
-            Bitmap newimage= filter.Apply((Bitmap)pictureBox1.Image);
+
+            Bitmap newimage = filter.Apply((Bitmap)pictureBox1.Image);
             pictureBox1.Image = newimage;
-
-           
-        }
-
-        private void gray_Click(object sender, EventArgs e)
-        {
-
-
-            GrayscaleBT709 gray1=new GrayscaleBT709();
-            pictureBox1.Image = gray1.Apply((Bitmap)pictureBox1.Image);
-           
-        }
-
-        private void resize_Click(object sender, EventArgs e)
-        {
-            
-            panel2.Visible = false;
-            panel6.Visible = true;
-            
-           
-            
-        }
-
-        private void crop_Click(object sender, EventArgs e)
-        {
-           
-            panel9.Visible = true;
-            /*
-            Crop filter = new Crop(new Rectangle(75, 75, 320, 240));
-            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = newImage;
-            */
-        }
-
-        private void sharpen_Click(object sender, EventArgs e)
-        {
-            Median filter = new Median();
-            Bitmap newimage= filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = newimage;
-        }
-
-        private void cancel_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = true;
-            panel6.Visible = false;
-           
-        }
-
-        private void rotate_Click(object sender, EventArgs e)
-        {
-            
-            RotateNearestNeighbor filter = new RotateNearestNeighbor(90, true);
-            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = newImage;
         }
 
         private void wave_Click(object sender, EventArgs e)
         {
-            WaterWave filter=new WaterWave();
-            filter.HorizontalWavesCount=10;
+            WaterWave filter = new WaterWave();
+            filter.HorizontalWavesCount = 10;
             filter.HorizontalWavesAmplitude = 5;
             filter.VerticalWavesCount = 10;
             filter.VerticalWavesAmplitude = 5;
@@ -159,46 +131,45 @@ namespace PhotoEditor
             pictureBox1.Image = waveimage;
         }
 
-        private void brightness_Click(object sender, EventArgs e)
+        private void brighten_Click(object sender, EventArgs e)
         {
-            
-            panel7.Visible = true;
-            
+            panel4.Visible = true;
         }
 
-        private void back_Click(object sender, EventArgs e)
+        private void backbrighten_Click(object sender, EventArgs e)
         {
-
-            panel7.Visible = false;
+            panel4.Visible = false;
         }
 
-       
-
-     
-
-      
-
-       
-       
-        private void applycrop_Click(object sender, EventArgs e)
+        private void highbrighten_Click(object sender, EventArgs e)
         {
-            int height, width;
-            width = Int32.Parse(textBox3.Text);
-            height = Int32.Parse(textBox4.Text);
-            Crop filter = new Crop(new Rectangle(width, height, 500-width, 500-height));
-            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = newImage;
+            BrightnessCorrection filter = new BrightnessCorrection(15);
+            Bitmap bright = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = bright;
         }
 
-        private void cancelcrop_Click(object sender, EventArgs e)
+        private void lowbrighten_Click(object sender, EventArgs e)
         {
-            panel9.Visible = false;
-            
+            BrightnessCorrection filter = new BrightnessCorrection(-15);
+            Bitmap bright = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = bright;
         }
 
         private void contrast_Click(object sender, EventArgs e)
         {
-            panel10.Visible = true;
+            panel5.Visible = true;
+        }
+
+        private void backcontrast_Click(object sender, EventArgs e)
+        {
+            panel5.Visible = false;
+        }
+
+        private void highcontrast_Click(object sender, EventArgs e)
+        {
+            ContrastCorrection filter = new ContrastCorrection(15);
+            Bitmap contrast = filter.Apply((Bitmap)pictureBox1.Image);
+            pictureBox1.Image = contrast;
         }
 
         private void lowcontrast_Click(object sender, EventArgs e)
@@ -208,64 +179,21 @@ namespace PhotoEditor
             pictureBox1.Image = contrast;
         }
 
-        private void highcontrast_Click(object sender, EventArgs e)
-        {
-            ContrastCorrection filter = new ContrastCorrection(15);
-            Bitmap contrast = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = contrast;
-
-        }
-
-        private void backcontrast_Click(object sender, EventArgs e)
-        {
-            panel10.Visible = false;
-        }
-
-        private void colors_Click(object sender, EventArgs e)
-        {
-            /*
-            BayerFilter filter = new BayerFilter();
-            Bitmap rgbImage = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = rgbImage;
-            */
-        }
-
-        private void lowbrighten_Click_1(object sender, EventArgs e)
-        {
-            BrightnessCorrection filter = new BrightnessCorrection(-15);
-            Bitmap bright = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = bright;
-        }
-
-        private void highbrighten_Click_1(object sender, EventArgs e)
-        {
-            BrightnessCorrection filter = new BrightnessCorrection(15);
-            Bitmap bright = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = bright;
-        }
-
-        private void applyresize_Click(object sender, EventArgs e)
-        {
-            int height, width;
-            width = Int32.Parse(textBox1.Text);
-            height = Int32.Parse(textBox2.Text);
-            ResizeNearestNeighbor filter = new ResizeNearestNeighbor(width, height);
-            Bitmap newImage = filter.Apply((Bitmap)pictureBox1.Image);
-            pictureBox1.Image = newImage;
-        }
-
         private void text_Click(object sender, EventArgs e)
         {
-            panel11.Visible = true;
+            panel6.Visible = true;
         }
 
         private void canceltext_Click(object sender, EventArgs e)
         {
-            panel11.Visible = false;
+            panel6.Visible = false;
         }
 
         private void applytext_Click(object sender, EventArgs e)
         {
+       
+
+            /*
             String drawString = textBox5.Text;
             Font drawFont = new Font("Arial", 16);
             SolidBrush drawBrush = new SolidBrush(Color.Black);
@@ -275,26 +203,43 @@ namespace PhotoEditor
             float height = 50.0F;
             RectangleF drawRect = new RectangleF(x, y, width, height);
             Pen blackPen = new Pen(Color.Black);
-           /* 
-            pictureBox1.Image= e.Graphics.DrawRectangle(blackPen, x, y, width, height);
-            pictureBox1.Image= e.Graphics.DrawString(drawString, drawFont, drawBrush, drawRect);
-            */
+
+            pictureBox1.Image = e.Graphics.DrawRectangle(blackPen, x, y, width, height);
+            pictureBox1.Image = e.Graphics.DrawString(drawString, drawFont, drawBrush, drawRect);
+             */
         }
 
-        private void exit_Click(object sender, EventArgs e)
+        private void zoomin_Click(object sender, EventArgs e)
         {
-            panel4.Visible = false;
-            panel8.Visible = true;
+            Size newSize = new Size((int)(pictureBox1.Image.Width * 1.25), (int)(pictureBox1.Image.Height * 1.25));
+            Bitmap obj = new Bitmap(pictureBox1.Image, newSize);
+            pictureBox1.Image = obj;
         }
 
-        private void menu_Click(object sender, EventArgs e)
+        private void zoomout_Click(object sender, EventArgs e)
         {
-            panel4.Visible = true;
-            panel8.Visible = false;
+            Size newSize = new Size((int)(pictureBox1.Image.Width * .75), (int)(pictureBox1.Image.Height * .75));
+            Bitmap obj = new Bitmap(pictureBox1.Image, newSize);
+            pictureBox1.Image = obj;
         }
+
+       
+
+      
+
         
+        
+        }
+
+        
+        
+
+        
+
+     
 
        
         
+        
     }
-}
+
